@@ -5,7 +5,7 @@ from keras.layers import LSTM,Dense
 import matplotlib.pyplot as plt
 from keras.models import load_model
 
-past_days=40
+past_days=30
 coming_days=10
 num_periods=20
 
@@ -28,8 +28,8 @@ scl = MinMaxScaler()
 array = scl.fit_transform(array)
 # array[:5]
 # print(array.shape)
-#split in Train and Test
 
+#split in Train and Test
 division = len(array) - num_periods*coming_days
 # print(division)
 array_test = array[division-past_days:]
@@ -41,7 +41,6 @@ array_train = array[:division]
 
 #It takes the data and splits in input X and output Y, by spliting in  30 past days as input X 
 #and 10 coming days as Y.
-
 def processData(data, past_days, coming_days,jump=1):
     X,Y = [],[]
     for i in range(0,len(data) -past_days -coming_days +1, jump):
@@ -66,7 +65,7 @@ print(y_test.shape)
 
 NUM_NEURONS_FirstLayer = 50
 NUM_NEURONS_SecondLayer = 30
-EPOCHS = 2
+EPOCHS = 100
 
 
 model = Sequential()
